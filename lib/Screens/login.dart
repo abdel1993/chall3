@@ -32,8 +32,7 @@ class _Screen1State extends State<Login> {
                 ),
                 // PassWord
                 CustomTextField(
-                  passWord: "",
-                  icons: Icons.visibility,
+                  passWord: "password",
                   hintText: "Enter password",
                 ),
                 CustomButton(

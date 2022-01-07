@@ -26,20 +26,19 @@ class _Screen1State extends State<SignUp> {
                 ),
                 //Full Name
                 CustomTextField(
-                  fullName: "",
+                  fullName: "fullname",
                   icons: Icons.person,
                   hintText: "Enter Full Name",
                 ),
                 // Email
                 CustomTextField(
-                  eMail: "",
+                  eMail: "email",
                   icons: Icons.email,
                   hintText: "Enter Email",
                 ),
                 // PassWord
                 CustomTextField(
-                  passWord: "",
-                  icons: Icons.visibility,
+                  passWord: "password",
                   hintText: "Enter password",
                 ),
                 CustomButton(
