@@ -3,14 +3,21 @@ import 'package:new_test_form/Costum_Widget/custombutton.dart';
 import 'package:new_test_form/Costum_Widget/customtextfield.dart';
 
 class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+  Login({Key? key, this.emailConfirmed, this.passwordConfirmed})
+      : super(key: key);
+  String log = "Login";
+  TextEditingController? emailConfirmed = TextEditingController();
+  TextEditingController? passwordConfirmed = TextEditingController();
 
   @override
   _Screen1State createState() => _Screen1State();
 }
 
 class _Screen1State extends State<Login> {
-  static GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  String log = "Login";
+  TextEditingController emailConfirmed = TextEditingController();
+  TextEditingController passwordConfirmed = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -26,17 +33,19 @@ class _Screen1State extends State<Login> {
                 ),
                 // Email
                 CustomTextField(
-                  eMail: "",
+                  controller: emailConfirmed,
+                  eMail: emailConfirmed,
                   icons: Icons.email,
                   hintText: "Enter Email",
                 ),
                 // PassWord
                 CustomTextField(
-                  passWord: "password",
+                  controller: passwordConfirmed,
+                  passWord: passwordConfirmed,
                   hintText: "Enter password",
                 ),
                 CustomButton(
-                  textPage: "Login",
+                  textPage: widget.log,
                   formKey: formkey,
                 ),
               ],

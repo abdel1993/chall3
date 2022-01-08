@@ -9,10 +9,12 @@ class CustomTextField extends StatefulWidget {
       this.eMail,
       this.passWord,
       this.icons,
-      this.hintText})
+      this.hintText,
+      this.controller})
       : super(key: key);
 
   var fullName, eMail, passWord;
+  TextEditingController? controller;
   IconData? icons;
   String? hintText;
 
@@ -32,11 +34,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
       padding: const EdgeInsets.all(20),
       //Text Field
       child: TextFormField(
-        obscureText: widget.passWord == "password" ? isVisible : false,
+        controller: widget.controller,
+        obscureText: widget.passWord == widget.controller ? isVisible : false,
         // Decoration
         decoration: InputDecoration(
           hintText: widget.hintText,
-          prefixIcon: widget.passWord == "password"
+          prefixIcon: widget.passWord == widget.controller
               ? IconButton(
                   icon: const Icon(Icons.visibility),
                   onPressed: () {
@@ -68,16 +71,30 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
         validator: (value) {
           if (value!.isEmpty) {
-            if (widget.fullName == "fullname") {
+            if (widget.fullName == widget.controller) {
               return 'please enter Full Name';
-            } else if (widget.eMail == "email") {
-              return 'Please a valid Email';
-            } else if (widget.passWord == "password") {
+            } else if (widget.eMail == widget.controller) {
+              return 'Please Enter Email';
+            } else if (widget.passWord == widget.controller) {
               return 'please enter PassWord';
             }
           }
-
-          return null;
+          if (widget.fullName == widget.controller &&
+              widget.controller!.text.length < 4) {
+            return 'Please Enter A Valid Name at Least 4 Letters ';
+          }
+          if (widget.passWord == widget.controller &&
+              widget.controller!.text.length < 6) {
+            return 'Your Pass Word must have at least 6 carecters';
+          }
+          if (widget.eMail == widget.controller &&
+              !RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                  .hasMatch(value)) {
+            return 'Please Enter A Valid Email exp xx@gmail.com';
+          }
+        },
+        onSaved: (newValue) {
+          widget.controller!.text = newValue!;
         },
       ),
     );

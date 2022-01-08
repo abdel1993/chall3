@@ -2,15 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:new_test_form/Costum_Widget/custombutton.dart';
 import 'package:new_test_form/Costum_Widget/customtextfield.dart';
 
+// ignore: must_be_immutable
 class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+  SignUp({Key? key, this.emailRex, this.passwordRex}) : super(key: key);
+
+  TextEditingController fullNameRex = TextEditingController();
+
+  TextEditingController? emailRex = TextEditingController();
+
+  TextEditingController? passwordRex = TextEditingController();
+
+  String sign = "SignUp";
 
   @override
-  _Screen1State createState() => _Screen1State();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _Screen1State extends State<SignUp> {
-  static GlobalKey<FormState> formkey = GlobalKey<FormState>();
+class _SignUpState extends State<SignUp> {
+  GlobalKey<FormState> formkey = GlobalKey<FormState>();
+
+  TextEditingController fullNameRex = TextEditingController();
+
+  TextEditingController emailRex = TextEditingController();
+
+  TextEditingController passwordRex = TextEditingController();
+
+  String sign = "SignUp";
 
   @override
   Widget build(BuildContext context) {
@@ -26,23 +43,26 @@ class _Screen1State extends State<SignUp> {
                 ),
                 //Full Name
                 CustomTextField(
-                  fullName: "fullname",
+                  controller: fullNameRex,
+                  fullName: fullNameRex,
                   icons: Icons.person,
                   hintText: "Enter Full Name",
                 ),
                 // Email
                 CustomTextField(
-                  eMail: "email",
+                  controller: emailRex,
+                  eMail: emailRex,
                   icons: Icons.email,
                   hintText: "Enter Email",
                 ),
                 // PassWord
                 CustomTextField(
-                  passWord: "password",
+                  controller: passwordRex,
+                  passWord: passwordRex,
                   hintText: "Enter password",
                 ),
                 CustomButton(
-                  textPage: "SignUp",
+                  textPage: sign,
                   formKey: formkey,
                 ),
               ],
